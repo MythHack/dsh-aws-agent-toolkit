@@ -29,20 +29,46 @@ credential chain has credentials (`aws login` or a configured profile).
 
 ## Install
 
+### Directly from GitHub (no clone)
+
+From a DSH session, install the repository as a package spec:
+
+```
+plugin_manager install_bundle github:MythHack/dsh-aws-agent-toolkit
+```
+
+pnpm fetches the repository tarball, the profile records the git spec, and
+`pnpm-lock.yaml` pins the exact commit that was installed. Pin a tag explicitly
+with `github:MythHack/dsh-aws-agent-toolkit#v0.1.0`. The two rows activate
+immediately; nothing needs to be cloned or built first.
+
+### From a local checkout (development)
+
 ```bash
 git clone https://github.com/MythHack/dsh-aws-agent-toolkit.git
-```
-
-Then install that directory as a profile bundle. From a DSH session, ask the
-agent to install it with the plugin manager, pointing at the absolute path:
-
-```
 plugin_manager install_bundle "C:/path/to/dsh-aws-agent-toolkit"
 ```
 
-(or use **Settings → Plugins** in the DSH Desktop UI). The plugin manager adds
-the dependency to the current profile, applies the bundle patch, and the two
-rows activate immediately.
+A directory install becomes a `link:` dependency, so edits in the checkout are
+picked up after a DSH restart (or a plugin-row reload) without reinstalling.
+
+### Update
+
+Installations are pinned; to move to the current repository state, remove and
+install again:
+
+```
+plugin_manager remove_bundle dsh-aws-agent-toolkit
+plugin_manager install_bundle github:MythHack/dsh-aws-agent-toolkit
+```
+
+### Troubleshooting on Windows
+
+Switching an existing profile from a local `link:` install to the GitHub spec
+can fail with `ERR_PNPM_EPERM ... rename ... node_modules/dsh-aws-agent-toolkit`:
+the old linked directory blocks pnpm's import. Remove the bundle first
+(`plugin_manager remove_bundle dsh-aws-agent-toolkit`), then install the git
+spec. A fresh profile is not affected.
 
 After installation:
 

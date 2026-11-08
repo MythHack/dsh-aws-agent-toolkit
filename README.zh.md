@@ -23,18 +23,44 @@ AWS 为 Claude Code、Codex、Cursor、Devin 提供的那套「技能 + MCP Serv
 
 ## 安装
 
+### 直接从 GitHub 安装（不用 clone）
+
+在 DSH 会话里让插件管理器按包规格安装：
+
+```
+plugin_manager install_bundle github:MythHack/dsh-aws-agent-toolkit
+```
+
+pnpm 会拉取仓库 tarball，profile 里记录 git 规格，`pnpm-lock.yaml` 会锁定安装到的
+具体 commit。要锁版本可以写 `github:MythHack/dsh-aws-agent-toolkit#v0.1.0`。
+安装后两行立即激活；不需要先 clone 或构建。
+
+### 从本地 checkout 安装（开发用）
+
 ```bash
 git clone https://github.com/MythHack/dsh-aws-agent-toolkit.git
-```
-
-然后在 DSH 会话里让 agent 用插件管理器安装这个目录（绝对路径）：
-
-```
 plugin_manager install_bundle "C:/path/to/dsh-aws-agent-toolkit"
 ```
 
-（也可以在 DSH Desktop 的 设置 → 插件 中安装。）安装后两行立即激活：
-技能目录马上多出 25 个 AWS 技能；MCP 行会用凭据尝试连接，若还没登录会保持
+目录安装是 `link:` 依赖，改完代码重启 DSH（或重载该行）即可生效，不用重装。
+
+### 更新
+
+安装会固定在某个 commit；要跟到仓库最新状态就移除后重装：
+
+```
+plugin_manager remove_bundle dsh-aws-agent-toolkit
+plugin_manager install_bundle github:MythHack/dsh-aws-agent-toolkit
+```
+
+### Windows 上的一个小坑
+
+已装过本地 `link:` 版本的 profile，直接改装 GitHub 规格时可能报
+`ERR_PNPM_EPERM ... rename ... node_modules/dsh-aws-agent-toolkit`——旧的链接目录
+挡住了 pnpm 的导入。先 `plugin_manager remove_bundle dsh-aws-agent-toolkit` 再装
+git 规格即可；全新 profile 不会有这个问题。
+
+安装后：技能目录马上多出 25 个 AWS 技能；MCP 行会用凭据尝试连接，若还没登录会保持
 `disconnected`，执行 `aws login` 后在插件管理器里重载该行（或重启 DSH）即可。
 
 连上后的工具：
