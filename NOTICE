@@ -1,0 +1,28 @@
+dsh-aws-agent-toolkit
+=====================
+
+This project is an unofficial community plugin bundle for DeepSeek Harness. It
+is not affiliated with, endorsed by, or sponsored by Amazon Web Services or
+DeepSeek.
+
+Third-party content
+-------------------
+
+The files under `skills/` are copied unmodified from the Agent Toolkit for AWS
+(https://github.com/aws/agent-toolkit-for-aws), Copyright Amazon.com, Inc. or
+its affiliates, and are licensed under the Apache License, Version 2.0
+(https://www.apache.org/licenses/LICENSE-2.0). They are redistributed here with
+the license and this attribution so that the bundle is self-contained.
+
+Original content
+----------------
+
+The bundle manifest, the Cordis loader patch (`cordis.patch.yml`), the bundled
+skill provider (`lib/index.js`), the MCP name bridge
+(`lib/aws-mcp-bridge.mjs`), the verification script, locale resources, icon,
+and documentation are original work, Copyright 2026 MythHack, and are licensed
+under the Apache License, Version 2.0.
+
+"Amazon Web Services", "AWS", and service names are trademarks of Amazon.com,
+Inc. or its affiliates. This project uses them only to describe the AWS services
+the bundled skills and MCP server work with.

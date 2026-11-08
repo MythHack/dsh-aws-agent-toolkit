@@ -1,0 +1,58 @@
+{
+  "name": "dsh-aws-agent-toolkit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DeepSeek Harness plugin bundle: 25 bundled AWS skills plus the AWS MCP Server connection",
+  "license": "Apache-2.0",
+  "author": "MythHack",
+  "homepage": "https://github.com/MythHack/dsh-aws-agent-toolkit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MythHack/dsh-aws-agent-toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MythHack/dsh-aws-agent-toolkit/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "dsh-bundle",
+    "aws",
+    "mcp",
+    "agent-skills"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/aws-mcp-bridge.mjs",
+    "skills",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "scripts/verify.mjs",
+    "README.md",
+    "README.zh.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "verify": "node scripts/verify.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

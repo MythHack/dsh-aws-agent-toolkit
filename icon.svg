@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="AWS Agent Toolkit">
+  <rect width="64" height="64" rx="14" fill="#232F3E"/>
+  <path d="M18.5 40.5a8.5 8.5 0 0 1-1.1-16.9A11 11 0 0 1 39 22.4a8.1 8.1 0 0 1 7.4 8.1 8 8 0 0 1-8 8H18.5z" fill="none" stroke="#FF9900" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M24 46.5h20" stroke="#FF9900" stroke-width="3" stroke-linecap="round"/>
+  <path d="M20 52.5h12" stroke="#8C9AA8" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="45" cy="45" r="5.5" fill="none" stroke="#FF9900" stroke-width="3"/>
+  <path d="M45 36.5v3M45 50.5v3M36.5 45h3M50.5 45h3" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

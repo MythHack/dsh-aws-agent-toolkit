@@ -1,0 +1,35 @@
+# DeepSeek Harness bundle rows for the Agent Toolkit for AWS.
+#
+# 1. Bundled AWS skills: a local Host provider that registers the 25 skills in
+#    ./skills on ctx.skills. Bodies load on demand and each loaded skill carries
+#    its own directory as the resource base, so `references/**` resolves.
+#
+# 2. AWS MCP Server: the managed endpoint over the SigV4 stdio proxy. The bridge
+#    in front of the proxy strips the server's own `aws___` tool-name prefix, so
+#    DSH exposes `mcp__aws__search_documentation` instead of the stacked
+#    `mcp__aws__aws___search_documentation`. All proxy arguments are passed
+#    through the bridge: endpoint first, then optional flags.
+#
+# Credentials come from the standard AWS chain: run `aws login` (AWS CLI 2.39+)
+# or configure a profile before the MCP tools can connect. Row configuration is
+# read at profile load, so changes here take effect after a DSH restart (or a
+# plugin-row reload from the plugin manager).
+- insert:
+    - id: aws-agent-toolkit-skills
+      name: 'dsh-aws-agent-toolkit'
+
+    - id: aws-agent-toolkit-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: aws
+        transport: stdio
+        command: node
+        args:
+          - node_modules/dsh-aws-agent-toolkit/lib/aws-mcp-bridge.mjs
+          - https://aws-mcp.us-east-1.api.aws/mcp
+          - --metadata
+          - AWS_REGION=us-east-1
+        # The linked bundle lives in the installing profile's node_modules, so
+        # resolve the bridge path against that profile directory.
+        cwd: !!js "process.env.DSH_PROFILE_DIR ?? ((process.env.DSH_HOME ?? ((process.env.USERPROFILE ?? process.env.HOME ?? '') + '/.dsh')) + '/profiles/' + (process.env.DSH_PROFILE ?? 'desktop'))"
+        toolCallTimeoutMs: 180000

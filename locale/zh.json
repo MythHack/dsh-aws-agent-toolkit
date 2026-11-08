@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "AWS Agent Toolkit",
+    "description": "内置 25 个 AWS 技能，并连接 AWS MCP Server，用于在 AWS 上构建、部署和运维。"
+  }
+}
